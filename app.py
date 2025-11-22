@@ -74,14 +74,15 @@ Sadece film isimlerini listeleme, kısa açıklama ekle ve tavsiye şeklinde yaz
 Kullanıcının yeni mesajı: {prompt}
 """
 
+        # ✨ temperature kaldırıldı
         response = model.generate_content(
             full_prompt,
-            temperature=0.7,
             max_output_tokens=500
         )
         return response.text
     except Exception as e:
         return f"Gemini hata verdi: {str(e)}"
+
 
 
 def search_movies_from_ai(ai_text):
