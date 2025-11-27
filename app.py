@@ -23,14 +23,20 @@ model = genai.GenerativeModel("gemini-2.0-flash")
 session_memory = {}  # {session_id: [mesaj1, mesaj2,...]}
 
 # -------------------------------
-#       LOCAL MOVIE DB
+#        LOCAL MOVIE DB
 # -------------------------------
 LOCAL_MOVIE_DB = []  # Eklenen filmler buraya kaydedilecek
 
 
 # -------------------------------
-#           ROUTES
+#            ROUTES
 # -------------------------------
+
+# 🔥 YENİ EKLENEN PING ENDPOINT 🔥
+@app.route("/ping", methods=["GET"])
+def ping():
+    """Sunucuyu uyanık tutmak için hafif endpoint"""
+    return "pong", 200
 
 @app.route("/add_movie", methods=["POST"])
 def add_movie():
@@ -160,7 +166,7 @@ Cevabın:
 
 
 # -------------------------------
-#     AI → TMDB Film Converter
+#      AI → TMDB Film Converter
 # -------------------------------
 def search_movies_from_ai(ai_text):
     """AI cevabındaki film isimlerini TMDB'den bulur ve döndürür"""
@@ -200,7 +206,7 @@ def search_movies_from_ai(ai_text):
 
 
 # -------------------------------
-#         RUN SERVER
+#          RUN SERVER
 # -------------------------------
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
